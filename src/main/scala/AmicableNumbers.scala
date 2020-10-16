@@ -15,6 +15,23 @@ object AmicableNumbers extends App {
     (1 to (n / 2)).filter(n %  _ == 0).sum
   }
 
-  println(sumOfDivisors(220)) // 284
+  def amicablePairs(until: Int) = {
 
+    val listOfSums = (0 until until).map { n =>
+      sumOfDivisors(n)
+    }
+
+    listOfSums.zipWithIndex.collect {
+      case (number, index) if sumOfDivisors(number) != number && sumOfDivisors(number) == index => index
+    }
+
+  }
+
+  val pairs = amicablePairs(10000)
+  println(pairs)
+
+  val total = pairs.sum
+  println(total)
 }
+
+
